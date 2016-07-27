@@ -1,4 +1,4 @@
-主机A想要免密码远程登录主机B：
+主机A想要免密码远程登录主机B:<br>
 主机A：
 cd ~/.ssh
 ssh-keygen -t rsa -P ''  ps：该命令生成idrsa和idrsa.pub
