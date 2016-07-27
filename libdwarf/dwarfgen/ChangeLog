@@ -1,0 +1,2 @@
+2016-01-14  David Anderson
+     * irepform.h: Missing return *this from several functions. Fixed.
