@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<api name='libvirt-lxc'>
+  <files>
+    <file name='libvirt-lxc'>
+     <summary>lxc specific interfaces</summary>
+     <description>Provides the interfaces of the libvirt library to handle LXC specific methods  Copyright (C) 2012-2013 Red Hat, Inc.  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.  This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.  You should have received a copy of the GNU Lesser General Public License along with this library.  If not, see &lt;http://www.gnu.org/licenses/&gt;. </description>
+     <author>Daniel P. Berrange &lt;berrange@redhat.com&gt; </author>
+     <exports symbol='virDomainLxcEnterNamespace' type='function'/>
+     <exports symbol='virDomainLxcEnterSecurityLabel' type='function'/>
+     <exports symbol='virDomainLxcOpenNamespace' type='function'/>
+    </file>
+  </files>
+  <symbols>
+    <function name='virDomainLxcEnterNamespace' file='libvirt-lxc' module='libvirt-lxc'>
+      <info><![CDATA[This API is LXC specific, so it will only work with hypervisor
+connections to the LXC driver.
+
+Attaches the process to the namespaces associated
+with the FDs in @fdlist
+
+If @oldfdlist is non-NULL, it will be populated with file
+descriptors representing the old namespace. This allows
+the caller to switch back to its current namespace later]]></info>
+      <return type='int' info='0 on success, -1 on error'/>
+      <arg name='domain' type='virDomainPtr' info='a domain object'/>
+      <arg name='nfdlist' type='unsigned int' info='number of FDs in @fdlist'/>
+      <arg name='fdlist' type='int *' info='list of namespace file descriptors'/>
+      <arg name='noldfdlist' type='unsigned int *' info='filled with number of old FDs'/>
+      <arg name='oldfdlist' type='int **' info='pointer to hold list of old namespace file descriptors'/>
+      <arg name='flags' type='unsigned int' info='currently unused, pass 0'/>
+    </function>
+    <function name='virDomainLxcEnterSecurityLabel' file='libvirt-lxc' module='libvirt-lxc'>
+      <info><![CDATA[This API is LXC specific, so it will only work with hypervisor
+connections to the LXC driver.
+
+Attaches the process to the security label specified
+by @label. @label is interpreted relative to @model
+Depending on the security driver, this may
+not take effect until the next call to exec().
+
+If @oldlabel is not NULL, it will be filled with info
+about the current security label. This may let the
+process be moved back to the previous label if no
+exec() has yet been performed.]]></info>
+      <return type='int' info='0 on success, -1 on error'/>
+      <arg name='model' type='virSecurityModelPtr' info='the security model to set'/>
+      <arg name='label' type='virSecurityLabelPtr' info='the security label to apply'/>
+      <arg name='oldlabel' type='virSecurityLabelPtr' info='filled with old security label'/>
+      <arg name='flags' type='unsigned int' info='currently unused, pass 0'/>
+    </function>
+    <function name='virDomainLxcOpenNamespace' file='libvirt-lxc' module='libvirt-lxc'>
+      <info><![CDATA[This API is LXC specific, so it will only work with hypervisor
+connections to the LXC driver.
+
+Open the namespaces associated with the container @domain.
+The @fdlist array will be allocated to a suitable size,
+and filled with file descriptors for the namespaces. It
+is the caller's responsibility to close the file descriptors
+
+The returned file descriptors are intended to be used with
+the setns() system call.]]></info>
+      <return type='int' info='the number of opened file descriptors, or -1 on error'/>
+      <arg name='domain' type='virDomainPtr' info='a domain object'/>
+      <arg name='fdlist' type='int **' info='pointer to an array to be filled with FDs'/>
+      <arg name='flags' type='unsigned int' info='currently unused, pass 0'/>
+    </function>
+  </symbols>
+</api>

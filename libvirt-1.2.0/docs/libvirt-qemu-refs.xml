@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<apirefs name='libvirt-qemu'>
+  <references>
+    <reference name='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK'/>
+    <reference name='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT'/>
+    <reference name='VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN'/>
+    <reference name='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT'/>
+    <reference name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT'/>
+    <reference name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP' href='html/libvirt-qemu-libvirt-qemu.html#VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP'/>
+    <reference name='virDomainQemuAgentCommand' href='html/libvirt-qemu-libvirt-qemu.html#virDomainQemuAgentCommand'/>
+    <reference name='virDomainQemuAgentCommandTimeoutValues' href='html/libvirt-qemu-libvirt-qemu.html#virDomainQemuAgentCommandTimeoutValues'/>
+    <reference name='virDomainQemuAttach' href='html/libvirt-qemu-libvirt-qemu.html#virDomainQemuAttach'/>
+    <reference name='virDomainQemuMonitorCommand' href='html/libvirt-qemu-libvirt-qemu.html#virDomainQemuMonitorCommand'/>
+    <reference name='virDomainQemuMonitorCommandFlags' href='html/libvirt-qemu-libvirt-qemu.html#virDomainQemuMonitorCommandFlags'/>
+  </references>
+  <alpha>
+    <letter name='V'>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT'/>
+      <ref name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT'/>
+      <ref name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP'/>
+    </letter>
+    <letter name='v'>
+      <ref name='virDomainQemuAgentCommand'/>
+      <ref name='virDomainQemuAgentCommandTimeoutValues'/>
+      <ref name='virDomainQemuAttach'/>
+      <ref name='virDomainQemuMonitorCommand'/>
+      <ref name='virDomainQemuMonitorCommandFlags'/>
+    </letter>
+  </alpha>
+  <constructors>
+    <type name='virDomainPtr'>
+      <ref name='virDomainQemuAttach'/>
+    </type>
+  </constructors>
+  <functions>
+    <type name='char **'>
+      <ref name='virDomainQemuMonitorCommand'/>
+    </type>
+    <type name='unsigned int'>
+      <ref name='virDomainQemuAgentCommand'/>
+      <ref name='virDomainQemuAttach'/>
+      <ref name='virDomainQemuMonitorCommand'/>
+    </type>
+    <type name='virConnectPtr'>
+      <ref name='virDomainQemuAttach'/>
+    </type>
+    <type name='virDomainPtr'>
+      <ref name='virDomainQemuAgentCommand'/>
+      <ref name='virDomainQemuMonitorCommand'/>
+    </type>
+  </functions>
+  <files>
+    <file name='libvirt-qemu'>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN'/>
+      <ref name='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT'/>
+      <ref name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT'/>
+      <ref name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP'/>
+      <ref name='virDomainQemuAgentCommand'/>
+      <ref name='virDomainQemuAgentCommandTimeoutValues'/>
+      <ref name='virDomainQemuAttach'/>
+      <ref name='virDomainQemuMonitorCommand'/>
+      <ref name='virDomainQemuMonitorCommandFlags'/>
+    </file>
+  </files>
+  <index>
+    <chunk name='chunk0'>
+      <letter name='A'>
+        <word name='API'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='API:'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='APIs'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='Agent'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+      </letter>
+      <letter name='E'>
+        <word name='Execute'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+      </letter>
+      <letter name='G'>
+        <word name='Guest'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+      </letter>
+      <letter name='I'>
+        <word name='Issue'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+      </letter>
+      <letter name='N'>
+        <word name='NULL'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='Q'>
+        <word name='QEMU'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='QMP'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='S'>
+        <word name='Send'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='T'>
+        <word name='There'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='This'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='U'>
+        <word name='UNIX'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='V'>
+        <word name='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='W'>
+        <word name='Windows'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='a'>
+        <word name='above'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='agent'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='also'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='alters'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='any'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='appear'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='arbitrary'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='are'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='arguments'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='attach'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='automatically'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='b'>
+        <word name='back'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='been'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='before'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='bitwise-or'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='block'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='but'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='c'>
+        <word name='caller'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='can'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='case'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='cause'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='changes'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='choice'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='command'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='configuration'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='connection'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='connections'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='considered'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='convert'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='converted'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='crash'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='current'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='currently'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='d'>
+        <word name='date'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='default'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='device'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='difficulties'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='does'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='domain'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='domains'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='driver'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='e'>
+        <word name='execution'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='external'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='externally'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='f'>
+        <word name='failure'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='features'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='filled'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='flags'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='for'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='forever'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='free'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='from'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='g'>
+        <word name='guarantees'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='guest'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='h'>
+        <word name='have'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='honored'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='hotplug'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='human'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='hypervisor'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='i'>
+        <word name='identified'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='int'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='into'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='k'>
+        <word name='know'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='l'>
+        <word name='lack'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='larger'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='launched'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='libvirt'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='libvirtd'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='list'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='m'>
+        <word name='made'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='making'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='mandatory'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='may'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='meaning'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='means'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='modifications'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='monitor'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='must'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='n'>
+        <word name='needed'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='new'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='normally'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='not'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='o'>
+        <word name='object'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='only'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='operate'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='optional'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='other'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='otherwise'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='output'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='p'>
+        <word name='pid_t'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='platforms'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='pointer'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='positive'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='possible'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='present'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='process'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='process:'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='protocol'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='provided'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='q'>
+        <word name='qemu'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='queries'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='r'>
+        <word name='recommended'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='requirements'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='result'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='returned'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='running'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+      <letter name='s'>
+        <word name='safe'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='safely'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='safety'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='seconds'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='set'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='several'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='should'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='since'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='socket'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='sockets'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='specific'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='started'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='state'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='string'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='strings'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='strongly'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='success'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='successful'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='successfully'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='support'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='supported'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='t'>
+        <word name='test'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='than'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='that'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='then'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='they'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='this'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='through'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='timeout'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='tracked'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='u'>
+        <word name='unplug'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='unsafe'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='unsigned'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='unused'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='use'>
+          <ref name='virDomainQemuAgentCommand'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='using'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+      </letter>
+    </chunk>
+    <chunk name='chunk1'>
+      <letter name='v'>
+        <word name='value'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='value:'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='version'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='via'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='virDomainQemuMonitorCommandFlags'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+      <letter name='w'>
+        <word name='wait'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='waiting'>
+          <ref name='virDomainQemuAgentCommand'/>
+        </word>
+        <word name='were'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='where'>
+          <ref name='virDomainQemuAttach'/>
+        </word>
+        <word name='will'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='with'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='without'>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+        <word name='work'>
+          <ref name='virDomainQemuAttach'/>
+          <ref name='virDomainQemuMonitorCommand'/>
+        </word>
+      </letter>
+    </chunk>
+    <chunks>
+      <chunk name='chunk0' start='A' end='u'/>
+      <chunk name='chunk1' start='v' end='w'/>
+    </chunks>
+  </index>
+</apirefs>

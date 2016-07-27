@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
+    <h1>404 page not found</h1>
+
+    <p>
+      Someone appears to have eaten the <del>penguin</del>
+      page you were looking for. You might want to try
+    </p>
+    <ul>
+      <li>going back to the <a href="http://libvirt.org/">home page</a> to find
+        a collection of links to interesting pages on this site</li>
+      <li>using the search box at the top right corner of the screen to
+        locate the content on this site or mailing list archives</li>
+    </ul>
+
+    <p class="image">
+      <img src="/libvirtLogo404.png" alt="libvirt Logo"/>
+    </p>
+
+
+  </body>
+</html>
