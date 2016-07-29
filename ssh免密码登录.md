@@ -20,5 +20,6 @@ vim sshd_config<br><br>
 RSAAuthentication yes<br>
 PubkeyAuthentication yes<br>
 AuthorizedKeysFile      %h/.ssh/authorized_keys<br><br>
+将PermitRootLogin项改为yes<br>
 重启ssh服务<br>
 service ssh restart
