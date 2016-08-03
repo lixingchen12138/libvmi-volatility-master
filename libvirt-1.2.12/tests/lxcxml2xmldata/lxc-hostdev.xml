@@ -1,0 +1,44 @@
+<domain type='lxc'>
+  <name>demo</name>
+  <uuid>8369f1ac-7e46-e869-4ca5-759d51478066</uuid>
+  <memory unit='KiB'>500000</memory>
+  <currentMemory unit='KiB'>500000</currentMemory>
+  <vcpu placement='static'>1</vcpu>
+  <os>
+    <type arch='x86_64'>exe</type>
+    <init>/bin/sh</init>
+  </os>
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/libexec/libvirt_lxc</emulator>
+    <filesystem type='mount' accessmode='passthrough'>
+      <source dir='/root/container'/>
+      <target dir='/'/>
+    </filesystem>
+    <console type='pty'>
+      <target type='lxc' port='0'/>
+    </console>
+    <hostdev mode='capabilities' type='storage'>
+      <source>
+        <block>/dev/sdf1</block>
+      </source>
+    </hostdev>
+    <hostdev mode='capabilities' type='misc'>
+      <source>
+        <char>/dev/tty0</char>
+      </source>
+    </hostdev>
+    <hostdev mode='capabilities' type='net'>
+      <source>
+        <interface>eth0</interface>
+      </source>
+      <ip address='192.168.122.2' family='ipv4'/>
+      <ip address='2003:db8:1:0:214:1234:fe0b:3596' family='ipv6' prefix='24'/>
+      <route family='ipv4' address='0.0.0.0' gateway='192.168.122.1'/>
+      <route family='ipv6' address='::' gateway='2003:db8:1:0:214:1234:fe0b:3595'/>
+    </hostdev>
+  </devices>
+</domain>

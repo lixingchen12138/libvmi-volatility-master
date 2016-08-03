@@ -1,0 +1,19 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+
+libvirt_api=${datarootdir}/libvirt/api/libvirt-api.xml
+
+# For compat with older versions - also present
+# in libvirt-qemu.pc / libvirt-lxc.pc
+libvirt_qemu_api=${datarootdir}/libvirt/api/libvirt-qemu-api.xml
+libvirt_lxc_api=${datarootdir}/libvirt/api/libvirt-lxc-api.xml
+
+Name: libvirt
+Version: 1.2.12
+Description: libvirt library
+Requires:
+Libs: -L${libdir} -lvirt
+Cflags: -I${includedir}

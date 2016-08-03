@@ -1,0 +1,74 @@
+#!/bin/sh
+# libvirt 'run' programs locally script
+# Copyright (C) 2012-2013 Red Hat, Inc.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; If not, see
+# <http://www.gnu.org/licenses/>.
+
+#----------------------------------------------------------------------
+#
+# With this script you can run libvirt programs without needing to
+# install them first.  You just have to do for example:
+#
+#   ./run ./tools/virsh [args ...]
+#
+# If you are already in the tools/ subdirectory, then the following
+# command will also work:
+#
+#   ../run ./virsh [...]
+#
+# You can also run the C programs under valgrind like this:
+#
+#   ./run valgrind [valgrind opts...] ./program
+#
+# or under gdb:
+#
+#   ./run gdb --args ./program
+#
+# This also works with sudo (eg. if you need root access for libvirt):
+#
+#   sudo ./run ./tools/virsh list --all
+#
+#----------------------------------------------------------------------
+
+# Find this script.
+b=@abs_builddir@
+
+library_path="$b/src/.libs"
+if [ -z "$LD_LIBRARY_PATH" ]; then
+    LD_LIBRARY_PATH=$library_path
+else
+    LD_LIBRARY_PATH="$library_path:$LD_LIBRARY_PATH"
+fi
+export LD_LIBRARY_PATH
+
+if [ -z "$PKG_CONFIG_PATH" ]; then
+    PKG_CONFIG_PATH="$b/src"
+else
+    PKG_CONFIG_PATH="$b/src:$PKG_CONFIG_PATH"
+fi
+export PKG_CONFIG_PATH
+
+export LIBVIRT_DRIVER_DIR="$b/src/.libs"
+export LIBVIRT_LOCK_MANAGER_PLUGIN_DIR="$b/src/.libs"
+export VIRTLOCKD_PATH="$b/src"
+export LIBVIRTD_PATH="$b/daemon"
+
+# This is a cheap way to find some use-after-free and uninitialized
+# read problems when using glibc.
+random_val="$(awk 'BEGIN{srand(); print 1+int(255*rand())}' < /dev/null)"
+export MALLOC_PERTURB_=$random_val
+
+# Run the program.
+exec $b/libtool --mode=execute "$@"

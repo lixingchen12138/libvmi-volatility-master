@@ -1,0 +1,22 @@
+<network trustGuestRxFilters='no'>
+  <name>vepa-net</name>
+  <uuid>81ff0d90-c91e-6742-64da-4a736edb9a8b</uuid>
+  <forward dev='eth1' mode='vepa'>
+    <interface dev='eth1'/>
+    <interface dev='eth2'/>
+    <interface dev='eth3'/>
+  </forward>
+  <virtualport type='802.1Qbg'>
+    <parameters managerid='11' typeid='1193047' typeidversion='2'/>
+  </virtualport>
+  <portgroup name='bob' default='yes'>
+    <virtualport type='802.1Qbg'>
+      <parameters typeid='2193047' typeidversion='3'/>
+    </virtualport>
+  </portgroup>
+  <portgroup name='alice' trustGuestRxFilters='yes'>
+    <virtualport type='802.1Qbg'>
+      <parameters managerid='13'/>
+    </virtualport>
+  </portgroup>
+</network>

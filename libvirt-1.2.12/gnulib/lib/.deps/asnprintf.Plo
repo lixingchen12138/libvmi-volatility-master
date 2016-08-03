@@ -1,0 +1,18 @@
+asnprintf.lo: asnprintf.c /usr/include/stdc-predef.h ../../config.h \
+ ../../config-post.h vasnprintf.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h
+
+/usr/include/stdc-predef.h:
+
+../../config.h:
+
+../../config-post.h:
+
+vasnprintf.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
+
+stddef.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:

@@ -1,0 +1,109 @@
+/* -*- c -*-
+ * libvirt.h: Core interfaces for the libvirt library
+ * Summary: core interfaces for the libvirt library
+ * Description: Provides the interfaces of the libvirt library to handle
+ *              virtualized domains
+ *
+ * Copyright (C) 2005-2006, 2010-2014 Red Hat, Inc.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ *
+ * Author: Daniel Veillard <veillard@redhat.com>
+ */
+
+#ifndef __VIR_VIRLIB_H__
+# define __VIR_VIRLIB_H__
+
+# include <sys/types.h>
+
+# ifdef __cplusplus
+extern "C" {
+# endif
+
+# ifndef VIR_DEPRECATED
+  /* The feature is present in gcc-3.1 and newer.  */
+#  if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1)
+#   define VIR_DEPRECATED __attribute__((__deprecated__))
+#  else
+#   define VIR_DEPRECATED /* nothing */
+#  endif
+# endif /* VIR_DEPRECATED */
+
+# ifdef WIN32
+#  ifdef LIBVIRT_STATIC
+#   define VIR_EXPORT_VAR extern
+#  else
+#   ifdef IN_LIBVIRT
+#    define VIR_EXPORT_VAR __declspec(dllexport)
+#   else
+#    define VIR_EXPORT_VAR __declspec(dllimport) extern
+#   endif
+#  endif
+# else
+#  define VIR_EXPORT_VAR extern
+# endif
+
+/* General note - in the header files, any linear enumeration which
+ * might be expanded in the future has an optional *_LAST value that
+ * gives the size of the enum at the time of compilation, if the user
+ * defines VIR_ENUM_SENTINELS.  Enumerations for bit values do not
+ * have a *_LAST value, but additional bits may be defined.  */
+
+/* library versioning */
+
+/**
+ * LIBVIR_VERSION_NUMBER:
+ *
+ * Macro providing the version of the library as
+ * version * 1,000,000 + minor * 1000 + micro
+ */
+
+# define LIBVIR_VERSION_NUMBER @LIBVIRT_VERSION_NUMBER@
+
+/**
+ * LIBVIR_CHECK_VERSION:
+ * @major: major component of the version number
+ * @minor: minor component of the version number
+ * @micro: micro component of the version number
+ *
+ * Macro for developers to easily check what version of the library
+ * their code is compiling against.
+ * e.g.
+ *   #if LIBVIR_CHECK_VERSION(1,1,3)
+ *     // some code that only works in 1.1.3 and newer
+ *   #endif
+ */
+# define LIBVIR_CHECK_VERSION(major, minor, micro) \
+    ((major) * 1000000 + (minor) * 1000 + (micro) <= LIBVIR_VERSION_NUMBER)
+
+# define __VIR_LIBVIRT_H_INCLUDES__
+# include <libvirt/libvirt-host.h>
+# include <libvirt/libvirt-domain.h>
+# include <libvirt/libvirt-domain-snapshot.h>
+# include <libvirt/libvirt-event.h>
+# include <libvirt/libvirt-interface.h>
+# include <libvirt/libvirt-network.h>
+# include <libvirt/libvirt-nodedev.h>
+# include <libvirt/libvirt-nwfilter.h>
+# include <libvirt/libvirt-secret.h>
+# include <libvirt/libvirt-storage.h>
+# include <libvirt/libvirt-stream.h>
+# undef __VIR_LIBVIRT_H_INCLUDES__
+
+# ifdef __cplusplus
+}
+# endif
+
+#endif /* __VIR_VIRLIB_H__ */

@@ -1,0 +1,8 @@
+[Unit]
+Description=Virtual machine lock manager socket
+
+[Socket]
+ListenStream=@localstatedir@/run/libvirt/virtlockd-sock
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,11 @@
+interface/libvirt_driver_interface_la-interface_driver.lo: \
+ interface/interface_driver.c /usr/include/stdc-predef.h ../config.h \
+ ../config-post.h interface/interface_driver.h
+
+/usr/include/stdc-predef.h:
+
+../config.h:
+
+../config-post.h:
+
+interface/interface_driver.h:

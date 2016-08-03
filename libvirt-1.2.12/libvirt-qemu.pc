@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+
+libvirt_qemu_api=${datarootdir}/libvirt/api/libvirt-qemu-api.xml
+
+Name: libvirt-qemu
+Version: 1.2.12
+Description: libvirt QEMU library
+Requires: libvirt
+Libs: -L${libdir} -lvirt-qemu
+Cflags: -I${includedir}

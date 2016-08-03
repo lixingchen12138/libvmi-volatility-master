@@ -1,0 +1,16 @@
+<volume type='network'>
+  <name>test2</name>
+  <source>
+  </source>
+  <capacity unit='bytes'>1024</capacity>
+  <allocation unit='bytes'>0</allocation>
+  <target>
+    <path>sheepdog:test2</path>
+    <format type='unknown'/>
+    <permissions>
+      <mode>0600</mode>
+      <owner>-1</owner>
+      <group>-1</group>
+    </permissions>
+  </target>
+</volume>

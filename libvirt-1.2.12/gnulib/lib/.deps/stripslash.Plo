@@ -1,0 +1,20 @@
+stripslash.lo: stripslash.c /usr/include/stdc-predef.h ../../config.h \
+ ../../config-post.h dirname.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h dosname.h
+
+/usr/include/stdc-predef.h:
+
+../../config.h:
+
+../../config-post.h:
+
+dirname.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h:
+
+stddef.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
+
+dosname.h:

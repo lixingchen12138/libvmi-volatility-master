@@ -1,0 +1,489 @@
+   libvirt Authors
+   ===============
+
+The libvirt project was initiated by:
+
+Daniel Veillard <veillard@redhat.com> or <daniel@veillard.com>
+
+The primary maintainers and people with commit access rights:
+
+Alex Jia <ajia@redhat.com>
+Cédric Bosdonnat <cbosdonnat@suse.com>
+Christophe Fergeau <cfergeau@redhat.com>
+Claudio Bley <claudio.bley@gmail.com>
+Cole Robinson <crobinso@redhat.com>
+Daniel Berrange <berrange@redhat.com>
+Daniel Veillard <veillard@redhat.com>
+Doug Goldstein <cardoe@gentoo.org>
+Eric Blake <eblake@redhat.com>
+Gao Feng <gaofeng@cn.fujitsu.com>
+Guido Günther <agx@sigxcpu.org>
+Ján Tomko <jtomko@redhat.com>
+Jim Fehlig <jfehlig@suse.com>
+Jiří Denemark <jdenemar@redhat.com>
+John Ferlan <jferlan@redhat.com>
+Laine Stump <laine@redhat.com>
+Mark McLoughlin <markmc@redhat.com>
+Martin Kletzander <mkletzan@redhat.com>
+Matthias Bolte <matthias.bolte@googlemail.com>
+Michal Prívozník <mprivozn@redhat.com>
+Pavel Hrdina <phrdina@redhat.com>
+Peter Krempa <pkrempa@redhat.com>
+Richard W.M. Jones <rjones@redhat.com>
+Roman Bogorodskiy <bogorodskiy@gmail.com>
+Stefan Berger <stefanb@us.ibm.com>
+Wen Congyang <wency@cn.fujitsu.com>
+
+Previous maintainers:
+
+Anthony Liguori <aliguori@us.ibm.com>
+Atsushi SAKAI <sakaia@jp.fujitsu.com>
+Chris Lalancette <clalance@redhat.com>
+Dan Smith <danms@us.ibm.com>
+Dave Allan <dallan@redhat.com>
+Dave Leskovec <dlesko@linux.vnet.ibm.com>
+Guannan Ren <gren@redhat.com>
+Jim Meyering <meyering@redhat.com>
+John Levon <john.levon@sun.com>
+Justin Clift <jclift@redhat.com>
+Karel Zak <kzak@redhat.com>
+Osier Yang <jyang@redhat.com>
+
+Patches have also been contributed by:
+
+Abel Míguez Rodríguez <amiguezr@pdi.ucm.es>
+Amit Shah <amit.shah@redhat.com>
+Andrew Puch <apuch@redhat.com>
+Anton Protopopov <aspsk2@gmail.com>
+Ben Guthro <ben.guthro@gmail.com>
+Christian Ehrhardt <ehrhardt@linux.vnet.ibm.com>
+Daniel Hokka Zakrisson <daniel@hozac.com>
+Dan Wendlandt <dan@nicira.com>
+David Lively <dlively@virtualiron.com>
+David Lutterkort <dlutter@redhat.com>
+Evgeniy Sokolov <evg@openvz.org>
+Hugh Brock <hbrock@redhat.com>
+Itamar Heim <iheim@redhat.com>
+James Morris <jmorris@namei.org>
+Javier Fontan <jfontan@gmail.com>
+Jeremy Katz <katzj@redhat.com>
+Kaitlin Rupert <kaitlin@linux.vnet.ibm.com>
+Kazuki Mizushima <mizushima.kazuk@jp.fujitsu.com>
+Mads Chr. Olesen <shiyee@shiyee.dk>
+Mark Johnson <johnson.nh@gmail.com>
+Markus Armbruster <armbru@redhat.com>
+Masayuki Sunou <fj1826dm@aa.jp.fujitsu.com>
+Matthias Witte <witte@netzquadrat.de>
+Michel Ponceau <michel.ponceau@bull.net>
+Nobuhiro Itou <fj0873gn@aa.jp.fujitsu.com>
+Pete Vetere <pvetere@redhat.com>
+Philippe Berthault <philippe.berthault@Bull.net>
+Saori Fukuta <fukuta.saori@jp.fujitsu.com>
+Shigeki Sakamoto <fj0588di@aa.jp.fujitsu.com>
+Shuveb Hussain <shuveb@binarykarma.com>
+Stefan de Konink <dekonink@kinkrsoftware.nl>
+Takahashi Tomohiro <takatom@jp.fujitsu.com>
+Tatsuro Enokura <fj7716hz@aa.jp.fujitsu.com>
+
+Adam Litke <agl@us.ibm.com>
+Adam Walters <adam@pandorasboxen.com>
+Alan Pevec <apevec@redhat.com>
+Alex Jia <ajia@redhat.com>
+Alex Williamson <alex.williamson@redhat.com>
+Alexander Burluka <aburluka@parallels.com>
+Alexander Larsson <alexl@redhat.com>
+Alexander Todorov <atodorov@otb.bg>
+Aline Manera <alinefm@br.ibm.com>
+Alon Levy <alevy@redhat.com>
+Alvaro Polo <apoloval@gmail.com>
+Amy Griffis <amy.griffis@hp.com>
+Andres Lagar-Cavilla <andres@lagarcavilla.org>
+Anirban Chakraborty <abchak@juniper.net>
+Ansis Atteka <aatteka@nicira.com>
+Anthony Liguori <aliguori@us.ibm.com>
+Anthony PERARD <anthony.perard@citrix.com>
+Antoni S. Puimedon <asegurap@redhat.com>
+Aron Griffis <aron.griffis@hp.com>
+Asad Saeed <asad.saeed@acidseed.com>
+Ata E Husain Bohra <ata.husain@hotmail.com>
+Atsushi Kumagai <kumagai-atsushi@mxc.nes.nec.co.jp>
+Atsushi SAKAI <sakaia@jp.fujitsu.com>
+Aurelien Rougemont <beorn@binaries.fr>
+Bamvor Jian Zhang <bamv2005@gmail.com>
+Bamvor Jian Zhang <bjzhang@suse.com>
+Beat Jörg <Beat.Joerg@ssatr.ch>
+Benjamin Cama <benoar@dolka.fr>
+Bharata B Rao <bharata@linux.vnet.ibm.com>
+Bing Bu Cao <mars@linux.vnet.ibm.com>
+Bogdan Purcareata <bogdan.purcareata@freescale.com>
+Boris Fiuczynski <fiuczy@linux.vnet.ibm.com>
+Brian Candler <b.candler@pobox.com>
+Bryan Kearney <bkearney@redhat.com>
+Cedric Bosdonnat <cbosdonnat@suse.com>
+Chang Liu <lingjiao.lc@taobao.com>
+Charles Duffy <charles_duffy@messageone.com>
+Chegu Vinod <chegu_vinod@hp.com>
+Chen Fan <chen.fan.fnst@cn.fujitsu.com>
+Chen Hanxiao <chenhanxiao@cn.fujitsu.com>
+Chris Lalancette <clalance@redhat.com>
+Chris St. Pierre <chris.a.st.pierre@gmail.com>
+Chris Wong <wongc-redhat@hoku.net>
+Chris Wright <chrisw@redhat.com>
+Christian Benvenuti <benve@cisco.com>
+Christian Franke <nobody@nowhere.ws>
+Christophe Fergeau <cfergeau@redhat.com>
+Chuck Short <chuck.short@canonical.com>
+Chuck Short <zulcss@gmail.com>
+Chunhe Li <lichunhe@huawei.com>
+Chunyan Liu <cyliu@suse.com>
+Clark Laughlin <clark.laughlin@linaro.org>
+Claudio Bley <claudio.bley@gmail.com>
+Cole Robinson <crobinso@redhat.com>
+Conrad Meyer <cse.cem@gmail.com>
+Cédric Bosdonnat <cbosdonnat@suse.com>
+Cédric Bosdonnat <cedric.bosdonnat@free.fr>
+Dan Horák <dan@danny.cz>
+Dan Kenigsberg <danken@redhat.com>
+Dan Smith <danms@us.ibm.com>
+Daniel Berrange <berrange@redhat.com>
+Daniel Berteaud <daniel@firewall-services.com>
+Daniel Gollub <gollub@b1-systems.de>
+Daniel Hansel <daniel.hansel@linux.vnet.ibm.com>
+Daniel J Walsh <dwalsh@redhat.com>
+Daniel P. Berrange <berrange@redhat.com>
+Daniel Veillard <veillard@redhat.com>
+Dario Faggioli <dario.faggioli@citrix.com>
+Darryl L. Pierce <dpierce@redhat.com>
+Dave Allan <dallan@redhat.com>
+David Allan <dallan@redhat.com>
+David Jorm <dfj@redhat.com>
+David L Stevens <dlstevens@us.ibm.com>
+David L. Leskovec <dlesko@linux.vnet.ibm.com>
+David S. Wang <dwang2@cisco.com>
+David Shane Holden <dpejesh@yahoo.com>
+David Weber <wb@munzinger.de>
+Davidlohr Bueso <dave@gnu.org>
+Dawid Zamirski <dzamirski@dattobackup.com>
+Deepak C Shetty <deepakcs@linux.vnet.ibm.com>
+Denis Kondratenko <denis.kondratenko@gmail.com>
+Dennis Chen <xschen@tnsoft.com.cn>
+Diego Elio Pettenò <flameeyes@gmail.com>
+Diego Woitasen <diego.woitasen@vhgroup.net>
+Dipankar Sarma <dipankar@in.ibm.com>
+Dirk Herrendoerfer <d.herrendoerfer@herrendoerfer.name>
+Dmitry Guryanov <dguryanov@parallels.com>
+Don Dugger <n0ano@n0ano.com>
+Doug Goldstein <cardoe@cardoe.com>
+Douglas Schilling Landgraf <dougsland@redhat.com>
+Duncan Rance <libvirt@dunquino.com>
+Dustin Kirkland <kirkland@canonical.com>
+Dustin Xiong <x_k_123@hotmail.com>
+Dusty Mabe <dustymabe@gmail.com>
+Dwight Engen <dwight.engen@oracle.com>
+Ed Swierk <eswierk@aristanetworks.com>
+Eduardo Costa <eduardobmc@gmail.com>
+Eduardo Otubo <otubo@linux.vnet.ibm.com>
+Eiichi Tsukata <eiichi.tsukata.xh@hitachi.com>
+Eli Qiao <taget@linux.vnet.ibm.com>
+Eric Blake <eblake@redhat.com>
+Eric Farman <farman@linux.vnet.ibm.com>
+Erik Skultety <eskultet@redhat.com>
+Ersek Laszlo <lacos@caesar.elte.hu>
+Eugen Feller <eugen.feller@inria.fr>
+Federico Simoncelli <fsimonce@redhat.com>
+Felix Geyer <debfx@fobos.de>
+Florian Vichot <florian.vichot@diateam.net>
+Francesco Romani <fromani@redhat.com>
+Fred A. Kemp <anonym@riseup.net>
+Frediano Ziglio <frediano.ziglio@citrix.com>
+Frido Roose <frido.roose@gmail.com>
+Fritz Elfert <fritz@fritz-elfert.de>
+Gao feng <gaofeng@cn.fujitsu.com>
+Garry Dolley <gdolley@arpnetworks.com>
+Gary R Hook <grhookatwork@gmail.com>
+Gene Czarcinski <gene@czarc.net>
+Geoff Hickey <ghickey@datagravity.com>
+Gerd Hoffmann <kraxel@redhat.com>
+Gerd v. Egidy <gerd@egidy.de>
+Gerhard Stenzel <gerhard.stenzel@de.ibm.com>
+Giuseppe Scrivano <gscrivan@redhat.com>
+Guan Qiang <hzguanqiang@corp.netease.com>
+Guannan Ren <gren@redhat.com>
+Gui Jianfeng <guijianfeng@cn.fujitsu.com>
+Guido Günther <agx@sigxcpu.org>
+Han Cheng <hanc.fnst@cn.fujitsu.com>
+Hao Liu <hliu@redhat.com>
+Harry Wei <harryxiyou@gmail.com>
+Harsh Prateek Bora <harsh@linux.vnet.ibm.com>
+Harshavardhana <harsha@gluster.com>
+Heath Petersen <HeathPetersen@Kandre.com>
+Hendrik Schwartke <hendrik@os-t.de>
+Henrik Persson E <henrik.e.persson@ericsson.com>
+Hero Phương <herophuong93@gmail.com>
+Hongbin Lu <hongbin034@gmail.com>
+Hongwei Bi <hwbi2008@gmail.com>
+Hu Jianwei <jiahu@redhat.com>
+Hu Tao <hutao@cn.fujitsu.com>
+Ian Campbell <Ian.Campbell@citrix.com>
+Ian Campbell <ian.campbell@citrix.com>
+Ian Main <imain@redhat.com>
+Ilja Livenson <ilja.livenson@gmail.com>
+J.B. Joret <jb@linux.vnet.ibm.com>
+James Shubin <james@shubin.ca>
+Jamie Strandboge <jamie@canonical.com>
+Jan Kiszka <jan.kiszka@siemens.com>
+Jason Andryuk <andryuk@aero.org>
+Jasper Lievisse Adriaanse <jasper@humppa.nl>
+Jean-Baptiste Rouault <jean-baptiste.rouault@diateam.net>
+Jeremy Fitzhardinge <jeremy@goop.org>
+Jesse Cook <code.crashenx@gmail.com>
+Jesse J. Cook <jesse.j.cook@member.fsf.org>
+Jianwei Hu <jiahu@redhat.com>
+Jim Fehlig <jfehlig@suse.com>
+Jim Meyering <meyering@redhat.com>
+Jim Paris <jim@jtan.com>
+Jincheng Miao <jmiao@redhat.com>
+Jiri Denemark <jdenemar@redhat.com>
+Joel SIMOES <joel.simoes@laposte.net>
+John Eckersberg <jeckersb@redhat.com>
+John Ferlan <jferlan@redhat.com>
+John Levon <john.levon@sun.com>
+John Morrissey <jwm@horde.net>
+John Williams <john.williams@petalogix.com>
+Jonas Eriksson <jonas.j.eriksson@ericsson.com>
+Jonathan Lebon <jlebon@redhat.com>
+Josh Durgin <josh.durgin@inktank.com>
+Josh Stone <jistone@redhat.com>
+Juerg Haefliger <juerg.haefliger@hp.com>
+Julio Faracco <jcfaracco@gmail.com>
+Jun Koi <junkoi2004@gmail.com>
+Justin Clift <jclift@redhat.com>
+Ján Tomko <jtomko@redhat.com>
+KAMEZAWA Hiroyuki <kamezawa.hiroyu@jp.fujitsu.com>
+Karel Zak <kzak@redhat.com>
+Kay Schubert <kayegypt@web.de>
+Ken ICHIKAWA <ichikawa.ken@jp.fujitsu.com>
+Kenneth Nagin <NAGIN@il.ibm.com>
+Kiarie Kahurani <davidkiarie4@gmail.com>
+Klaus Ethgen <Klaus@Ethgen.de>
+Kyle DeFrancia <kdef@linux.vnet.ibm.com>
+Kyle Mestery <kmestery@cisco.com>
+Lai Jiangshan <laijs@cn.fujitsu.com>
+Laine Stump <laine@redhat.com>
+Laszlo Ersek <lersek@redhat.com>
+Laurent Léonard <laurent@open-minds.org>
+Lei Li <lilei@linux.vnet.ibm.com>
+Li Yang <liyang.fnst@cn.fujitsu.com>
+Li Zhang <zhlcindy@linux.vnet.ibm.com>
+Lincoln Myers <lincoln_myers@yahoo.com>
+Liuji (Jeremy) <jeremy.liu@huawei.com>
+Lorin Hochstein <lorin@isi.edu>
+Lubomir Rintel <lkundrak@v3.sk>
+Luiz Capitulino <lcapitulino@redhat.com>
+Luyao Huang <lhuang@redhat.com>
+Lénaïc Huard <lenaic@lhuard.fr.eu.org>
+MATSUDA Daiki <matsudadik@intellilink.co.jp>
+MORITA Kazutaka <morita.kazutaka@lab.ntt.co.jp>
+Manuel VIVES <manuel.vives@diateam.net>
+Marc-André Lureau <marcandre.lureau@redhat.com>
+Marcelo Cerri <mhcerri@linux.vnet.ibm.com>
+Marco Bozzolan <bozzolan@gmail.com>
+Marek Marczykowski <marmarek@invisiblethingslab.com>
+Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Marian Neagul <marian@info.uvt.ro>
+Mark McLoughlin <markmc@redhat.com>
+Mark Wu <dwu@redhat.com>
+Markus Groß <gross@univention.de>
+Marti Raudsepp <marti@juffo.org>
+Martin Kletzander <mkletzan@redhat.com>
+Matthew Booth <mbooth@redhat.com>
+Matthew Rosato <mjrosato@linux.vnet.ibm.com>
+Matthias Bolte <matthias.bolte@googlemail.com>
+Matthias Dahl <mdvirt@designassembly.de>
+Matthias Gatto <matthias.gatto@outscale.com>
+Matthieu Coudron <mattator@gmail.com>
+Mattias Bolte <matthias.bolte@googlemail.com>
+Maxime Leroy <maxime.leroy@6wind.com>
+Maximilian Wilhelm <max@rfc2324.org>
+Michael Avdienko <whitearchey@gmail.com>
+Michael Chapman <mike@very.puzzling.org>
+Michael Ellerman <michael@ellerman.id.au>
+Michael R. Hines <mrhines@us.ibm.com>
+Michael Santos <michael.santos@gmail.com>
+Michael Wood <esiotrot@gmail.com>
+Michal Novotny <minovotn@redhat.com>
+Michal Privoznik <miso.privoznik@gmail.com>
+Michal Privoznik <mprivozn@redhat.com>
+Michal Prívozník <mprivozn@redhat.com>
+Michał Łomnicki <michal.lomnicki@gmail.com>
+Michele Paolino <m.paolino@virtualopensystems.com>
+Mike Latimer <mlatimer@suse.com>
+Mike Perez <thingee@gmail.com>
+Milos Vyletel <milos.vyletel@sde.cz>
+Miloslav Trmač <mitr@redhat.com>
+Minoru Usui <usui@mxm.nes.nec.co.jp>
+Mo yuxiang <moyuxiang@huawei.com>
+Mooli Tayer <mtayer@redhat.com>
+Nan Zhang <nzhang@redhat.com>
+Naoya Horiguchi <n-horiguchi@ah.jp.nec.com>
+Natanael Copa <ncopa@alpinelinux.org>
+Nehal J Wani <nehaljw.kkd1@gmail.com>
+Neil Wilson <neil@aldur.co.uk>
+Nguyen Anh Quynh <aquynh@gmail.com>
+Niels de Vos <ndevos@redhat.com>
+Nikunj A. Dadhania <nikunj@linux.vnet.ibm.com>
+Nishank Trivedi <nistrive@cisco.com>
+Ohad Levy <ohadlevy@gmail.com>
+Olaf Hering <olaf@aepfle.de>
+Oleg Strikov <oleg.strikov@canonical.com>
+Olivia Yin <Hong-Hua.Yin@freescale.com>
+Olivia Yin <hong-hua.yin@freescale.com>
+Olivier Fourdan <ofourdan@redhat.com>
+Osier Yang <jyang@redhat.com>
+Oskari Saarenmaa <os@ohmu.fi>
+Paolo Bonzini <pbonzini@redhat.com>
+Paolo Smiraglia <paolo.smiraglia@gmail.com>
+Patrice LACHANCE <patlachance@gmail.com>
+Patrick Dignan <pat_dignan@dell.com>
+Paul Eggert <eggert@cs.ucla.edu>
+Pavel Hrdina <phrdina@redhat.com>
+Pavel Raiskup <praiskup@redhat.com>
+Paweł Krześniak <pawel.krzesniak@gmail.com>
+Peng Zhou <ailvpeng25@gmail.com>
+Peter Feiner <peter@gridcentric.ca>
+Peter Krempa <pkrempa@redhat.com>
+Peter Robinson <pbrobinson@gmail.com>
+Phil Petty <phpetty@cisco.com>
+Philipp Hahn <hahn@univention.de>
+Pieter Hollants <pieter@hollants.com>
+Pradipta Kr. Banerjee <bpradip@in.ibm.com>
+Pradipta Kr. Banerjee <pradipta.banerjee@gmail.com>
+Pranavkumar Sawargaonkar <pranavkumar@linaro.org>
+Prerna Saxena <prerna@linux.vnet.ibm.com>
+Pritesh Kothari <pritesh.kothari@sun.com>
+Qiao Nuohan <qiaonuohan@cn.fujitsu.com>
+Radu Caragea <dmns_serp@yahoo.com>
+Reinier Schoof <reinier@transip.nl>
+Richa Marwaha <rmarwah@linux.vnet.ibm.com>
+Richard Jones <rjones@redhat.com>
+Richard Laager <rlaager@wiktel.com>
+Richard W.M. Jones <rjones@redhat.com>
+Richard Weinberger <richard@nod.at>
+Rick Harris <rconradharris@gmail.com>
+Rolf Eike Beer <eike@sf-mail.de>
+Roman Bogorodskiy <bogorodskiy@gmail.com>
+Rommer <rommer@active.by>
+Ron Yorston <rmy@tigress.co.uk>
+Roopa Prabhu <roprabhu@cisco.com>
+Royce Lv <lvroyce@linux.vnet.ibm.com>
+Ruben Kerkhof <ruben@rubenkerkhof.com>
+Ryan Harper <ryanh@us.ibm.com>
+Ryan Woodsmall <rwoodsmall@gmail.com>
+Ryota Ozaki <ozaki.ryota@gmail.com>
+Sage Weil <sage@newdream.net>
+Sahid Orentino Ferdjaoui <sahid.ferdjaoui@cloudwatt.com>
+Sam Bobroff <sam.bobroff@au1.ibm.com>
+Sascha Peilicke <saschpe@suse.de>
+Satoru Moriya <satoru.moriya@hds.com>
+Satoru SATOH <satoru.satoh@gmail.com>
+Scott Moser <smoser@ubuntu.com>
+Scott Sullivan <ssullivan@liquidweb.com>
+Sebastian Wiedenroth <wiedi@frubar.net>
+Serge E. Hallyn <serge.hallyn@canonical.com>
+Serge Hallyn <serge.hallyn@ubuntu.com>
+Sergey Fionov <fionov@gmail.com>
+Shahar Klein <shaharklein@yahoo.com>
+Shanzhi Yu <shyu@redhat.com>
+Sharadha Prabhakar <sharadha.prabhakar@citrix.com>
+Shivaprasad G Bhat <shivaprasadbhat@gmail.com>
+Shradha Shah <sshah@solarflare.com>
+Simone Gotti <simone.gotti@gmail.com>
+Soren Hansen <soren@linux2go.dk>
+Spencer Shimko <sshimko@tresys.com>
+Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+Stef Walter <stefw@gnome.org>
+Stefan Bader <stefan.bader@canonical.com>
+Stefan Berger <stefanb@us.ibm.com>
+Stefan Hajnoczi <stefanha@linux.vnet.ibm.com>
+Stefan Hajnoczi <stefanha@redhat.com>
+Stefan Seyfried <seife@b1-systems.de>
+Steve Hodgson <shodgson@solarflare.com>
+Steve Yarmie <steve.yarmie@gmail.com>
+Steven McDonald <steven.mcdonald@anchor.net.au>
+Sukadev Bhattiprolu <sukadev@linux.vnet.ibm.com>
+Supriya Kannery <supriyak@linux.vnet.ibm.com>
+Taisuke Yamada <tai@rakugaki.org>
+Taizo ITO <taizo.ito@hde.co.jp>
+Taku Izumi <izumi.taku@jp.fujitsu.com>
+Tal Kain <tal.kain@ravellosystems.com>
+Tang Chen <tangchen@cn.fujitsu.com>
+Taowei <uaedante@gmail.com>
+Taowei Luo <uaedante@gmail.com>
+Thadeu Lima de Souza Cascardo <cascardo@linux.vnet.ibm.com>
+Thang Pham <thang.pham@us.ibm.com>
+Thibault VINCENT <thibault.vincent@smartjog.com>
+Thierry Parmentelat <thierry.parmentelat@inria.fr>
+Thomas Treutner <thomas@scripty.at>
+Thomas Woerner <twoerner@redhat.com>
+Thorsten Behrens <tbehrens@suse.com>
+Tiziano Mueller <dev-zero@gentoo.org>
+Tom Vijlbrief <tom.vijlbrief@xs4all.nl>
+Tomas Meszaros <exo@tty.sk>
+Tomoki Sekiyama <tomoki.sekiyama@hds.com>
+Tony Krowiak <akrowiak@linux.vnet.ibm.com>
+Tyler Coumbes <coumbes@gmail.com>
+Viktor Mihajlovski <mihajlov@linux.vnet.ibm.com>
+Vitor de Lima <vitor.lima@eldorado.org.br>
+Vladislav Bogdanov <bubble@hoster-ok.com>
+Václav Pavlín <vpavlin@redhat.com>
+Wang Rui <moon.wangrui@huawei.com>
+Wang Yufei (James) <james.wangyufei@huawei.com>
+Wangrui (K) <moon.wangrui@huawei.com>
+Wei Liu <wei.liu2@citrix.com>
+Weiwei Li <nuonuoli@tencent.com>
+Wen Congyang <wency@cn.fujitsu.com>
+Wido den Hollander <wido@widodh.nl>
+Wieland Hoffmann <themineo@googlemail.com>
+William Jon McCann <william.jon.mccann@gmail.com>
+Wojciech Macek <wma@semihalf.com>
+Wolfgang Mauerer <wolfgang.mauerer@siemens.com>
+Wout Mertens <Wout.Mertens@gmail.com>
+Wout Mertens <wout.mertens@gmail.com>
+Xu He Jie <xuhj@linux.vnet.ibm.com>
+Xuesong Zhang <xuzhang@redhat.com>
+Yanbing Du <ydu@redhat.com>
+Yanbing Du <ydu@ydu-0.nay.redhat.com>
+Yogesh Tillu <tillu.yogesh@gmail.com>
+Yohan BELLEGUIC <yohan.belleguic@diateam.net>
+Yudai Yamagish <yummy@sfc.wide.ad.jp>
+Yue wenyuan <yuewenyuan@huawei.com>
+Yufang Zhang <yufang521247@gmail.com>
+Yufang Zhang <yuzhang@redhat.com>
+Yuji NISHIDA <nishidy@nict.go.jp>
+Yuri Chornoivan <yurchor@ukr.net>
+Yuri Myasoedov <ymyasoedov@yandex.ru>
+Yuto KAWAMURA(kawamuray) <kawamuray.dadada@gmail.com>
+Zdenek Styblik <stybla@turnovfree.net>
+Zeeshan Ali (Khattak) <zeeshanak@gnome.org>
+Zeng Junliang <zengjunliang@huawei.com>
+Zhang Xiaohe <zhangxh@cn.fujitsu.com>
+Zhou Yimin <zhouyimin@huawei.com>
+Zhou yimin <zhouyimin@huawei.com>
+hejia hejia <jiakernel@gmail.com>
+james robson <jrobson@websense.com>
+lawrancejing <lawrancejing@gmail.com>
+liguang <lig.fnst@cn.fujitsu.com>
+ryan woodsmall <rwoodsmall@gmail.com>
+weiwei li <weiweili821@gmail.com>
+xuzhang <xuzhang@redhat.com>
+yangdongsheng <yangds.fnst@cn.fujitsu.com>
+Марк Коренберг <socketpair@gmail.com>
+
+[....send patches to get your name here....]
+
+The libvirt logo was designed by Diana Fong
+
+-- End
+;; Local Variables:
+;; coding: utf-8
+;; End:

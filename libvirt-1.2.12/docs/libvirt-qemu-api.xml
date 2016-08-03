@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<api name='libvirt-qemu'>
+  <files>
+    <file name='libvirt-qemu'>
+     <summary>qemu specific interfaces</summary>
+     <description>Provides the interfaces of the libvirt library to handle qemu specific methods  Copyright (C) 2010-2014 Red Hat, Inc.  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.  This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.  You should have received a copy of the GNU Lesser General Public License along with this library.  If not, see &lt;http://www.gnu.org/licenses/&gt;. </description>
+     <author>Chris Lalancette &lt;clalance@redhat.com&gt; </author>
+     <exports symbol='VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_NOCASE' type='enum'/>
+     <exports symbol='VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_REGEX' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT' type='enum'/>
+     <exports symbol='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP' type='enum'/>
+     <exports symbol='virConnectDomainQemuMonitorEventRegisterFlags' type='typedef'/>
+     <exports symbol='virDomainQemuAgentCommandTimeoutValues' type='typedef'/>
+     <exports symbol='virDomainQemuMonitorCommandFlags' type='typedef'/>
+     <exports symbol='virConnectDomainQemuMonitorEventCallback' type='function'/>
+     <exports symbol='virConnectDomainQemuMonitorEventDeregister' type='function'/>
+     <exports symbol='virConnectDomainQemuMonitorEventRegister' type='function'/>
+     <exports symbol='virDomainQemuAgentCommand' type='function'/>
+     <exports symbol='virDomainQemuAttach' type='function'/>
+     <exports symbol='virDomainQemuMonitorCommand' type='function'/>
+    </file>
+  </files>
+  <symbols>
+    <enum name='VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_NOCASE' file='libvirt-qemu' value='2' type='virConnectDomainQemuMonitorEventRegisterFlags'/>
+    <enum name='VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_REGEX' file='libvirt-qemu' value='1' type='virConnectDomainQemuMonitorEventRegisterFlags' info='Event filter is case insensitive'/>
+    <enum name='VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK' file='libvirt-qemu' value='-2' type='virDomainQemuAgentCommandTimeoutValues'/>
+    <enum name='VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT' file='libvirt-qemu' value='-1' type='virDomainQemuAgentCommandTimeoutValues'/>
+    <enum name='VIR_DOMAIN_QEMU_AGENT_COMMAND_MIN' file='libvirt-qemu' value='-2' type='virDomainQemuAgentCommandTimeoutValues'/>
+    <enum name='VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT' file='libvirt-qemu' value='0' type='virDomainQemuAgentCommandTimeoutValues'/>
+    <enum name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_DEFAULT' file='libvirt-qemu' value='0' type='virDomainQemuMonitorCommandFlags'/>
+    <enum name='VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP' file='libvirt-qemu' value='1' type='virDomainQemuMonitorCommandFlags' info='cmd is in HMP'/>
+    <typedef name='virConnectDomainQemuMonitorEventRegisterFlags' file='libvirt-qemu' type='enum'/>
+    <typedef name='virDomainQemuAgentCommandTimeoutValues' file='libvirt-qemu' type='enum'/>
+    <typedef name='virDomainQemuMonitorCommandFlags' file='libvirt-qemu' type='enum'/>
+    <functype name='virConnectDomainQemuMonitorEventCallback' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[The callback signature to use when registering for a qemu monitor
+event with virConnectDomainQemuMonitorEventRegister().]]></info>
+      <return type='void'/>
+      <arg name='conn' type='virConnectPtr' info='the connection pointer'/>
+      <arg name='dom' type='virDomainPtr' info='the domain pointer'/>
+      <arg name='event' type='const char *' info='the name of the event'/>
+      <arg name='seconds' type='long long' info='the qemu timestamp of the event: seconds since Epoch, or -1 if not available'/>
+      <arg name='micros' type='unsigned int' info='the qemu timestamp of the event: microseconds within the second'/>
+      <arg name='details' type='const char *' info='the JSON details of the event, if any were given'/>
+      <arg name='opaque' type='void *' info='application specified data'/>
+    </functype>
+    <function name='virConnectDomainQemuMonitorEventDeregister' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[Removes an event callback. The callbackID parameter should be the
+value obtained from a previous virConnectDomainQemuMonitorEventRegister()
+method.]]></info>
+      <return type='int' info='0 on success, -1 on failure'/>
+      <arg name='conn' type='virConnectPtr' info='pointer to the connection'/>
+      <arg name='callbackID' type='int' info='the callback identifier'/>
+    </function>
+    <function name='virConnectDomainQemuMonitorEventRegister' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[This API is QEMU specific, so it will only work with hypervisor
+connections to the QEMU driver.
+
+Adds a callback to receive notifications of arbitrary qemu monitor events
+occurring on a domain.  Many qemu monitor events also result in a libvirt
+event which can be delivered via virConnectDomainEventRegisterAny(); this
+command is primarily for testing new qemu events that have not yet been
+given a libvirt counterpart event.
+
+If @dom is NULL, then events will be monitored for any domain. If @dom
+is non-NULL, then only the specific domain will be monitored.
+
+If @event is NULL, then all monitor events will be reported. If @event is
+non-NULL, then only specific monitor events will be reported.  @flags
+controls how the filtering is performed: 0 requests an exact match, while
+VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_REGEX states that @event
+is a basic regular expression.  Additionally, including
+VIR_CONNECT_DOMAIN_QEMU_MONITOR_EVENT_REGISTER_NOCASE lets @event match
+case-insensitively.
+
+The virDomainPtr object handle passed into the callback upon delivery
+of an event is only valid for the duration of execution of the callback.
+If the callback wishes to keep the domain object after the callback returns,
+it shall take a reference to it, by calling virDomainRef().
+The reference can be released once the object is no longer required
+by calling virDomainFree().
+
+The return value from this method is a positive integer identifier
+for the callback. To unregister a callback, this callback ID should
+be passed to the virConnectDomainQemuMonitorEventDeregister() method.]]></info>
+      <return type='int' info='a callback identifier on success, -1 on failure'/>
+      <arg name='conn' type='virConnectPtr' info='pointer to the connection'/>
+      <arg name='dom' type='virDomainPtr' info='pointer to the domain, or NULL'/>
+      <arg name='event' type='const char *' info='name of the event, or NULL'/>
+      <arg name='cb' type='virConnectDomainQemuMonitorEventCallback' info='callback to the function handling monitor events'/>
+      <arg name='opaque' type='void *' info='opaque data to pass on to the callback'/>
+      <arg name='freecb' type='virFreeCallback' info='optional function to deallocate opaque when not used anymore'/>
+      <arg name='flags' type='unsigned int' info='bitwise-OR of virConnectDomainQemuMonitorEventRegisterFlags'/>
+    </function>
+    <function name='virDomainQemuAgentCommand' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[Execute an arbitrary Guest Agent command.
+
+Issue @cmd to the guest agent running in @domain.
+@timeout must be -2, -1, 0 or positive.
+VIR_DOMAIN_QEMU_AGENT_COMMAND_BLOCK(-2): meaning to block forever waiting for
+a result.
+VIR_DOMAIN_QEMU_AGENT_COMMAND_DEFAULT(-1): use default timeout value.
+VIR_DOMAIN_QEMU_AGENT_COMMAND_NOWAIT(0): does not wait.
+positive value: wait for @timeout seconds]]></info>
+      <return type='char *' info='strings if success, NULL in failure.'/>
+      <arg name='domain' type='virDomainPtr' info='a domain object'/>
+      <arg name='cmd' type='const char *' info='the guest agent command string'/>
+      <arg name='timeout' type='int' info='timeout seconds'/>
+      <arg name='flags' type='unsigned int' info='execution flags'/>
+    </function>
+    <function name='virDomainQemuAttach' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[This API is QEMU specific, so it will only work with hypervisor
+connections to the QEMU driver.
+
+This API will attach to an externally launched QEMU process
+identified by @pid. There are several requirements to successfully
+attach to an external QEMU process:
+
+  - It must have been started with a monitor socket using the UNIX
+    domain socket protocol.
+  - No device hotplug/unplug, or other configuration changes can
+    have been made via the monitor since it started.
+  - The '-name' and '-uuid' arguments should have been set (not
+    mandatory, but strongly recommended)
+
+To date, the only platforms we know of where pid_t is larger than
+unsigned int (64-bit Windows) also lack UNIX sockets, so the choice
+of @pid_value as an unsigned int should not present any difficulties.
+
+If successful, then the guest will appear in the list of running
+domains for this connection, and other APIs should operate
+normally (provided the above requirements were honored).]]></info>
+      <return type='virDomainPtr' info='a new domain object on success, NULL otherwise'/>
+      <arg name='conn' type='virConnectPtr' info='pointer to a hypervisor connection'/>
+      <arg name='pid_value' type='unsigned int' info='the UNIX process ID of the external QEMU process'/>
+      <arg name='flags' type='unsigned int' info='optional flags, currently unused'/>
+    </function>
+    <function name='virDomainQemuMonitorCommand' file='libvirt-qemu' module='libvirt-qemu'>
+      <info><![CDATA[This API is QEMU specific, so it will only work with hypervisor
+connections to the QEMU driver.
+
+Send an arbitrary monitor command @cmd to @domain through the
+qemu monitor. There are several requirements to safely and
+successfully use this API:
+
+  - A @cmd that queries state without making any modifications is safe
+  - A @cmd that alters state that is also tracked by libvirt is unsafe,
+    and may cause libvirtd to crash
+  - A @cmd that alters state not tracked by the current version of
+    libvirt is possible as a means to test new qemu features before
+    they have support in libvirt, but no guarantees are made to safety
+
+If VIR_DOMAIN_QEMU_MONITOR_COMMAND_HMP is set, the command is
+considered to be a human monitor command and libvirt will automatically
+convert it into QMP if needed.  In that case the @result will also
+be converted back from QMP.
+
+If successful, @result will be filled with the string output of the
+@cmd, and the caller must free this string.]]></info>
+      <return type='int' info='0 in case of success, -1 in case of failure'/>
+      <arg name='domain' type='virDomainPtr' info='a domain object'/>
+      <arg name='cmd' type='const char *' info='the qemu monitor command string'/>
+      <arg name='result' type='char **' info='a string returned by @cmd'/>
+      <arg name='flags' type='unsigned int' info='bitwise-or of supported virDomainQemuMonitorCommandFlags'/>
+    </function>
+  </symbols>
+</api>

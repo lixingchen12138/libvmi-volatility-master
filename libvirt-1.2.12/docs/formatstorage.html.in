@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
+    <h1>Storage pool and volume XML format</h1>
+
+    <ul id="toc"></ul>
+
+    <h2><a name="StoragePool">Storage pool XML</a></h2>
+
+    <p>
+      Although all storage pool backends share the same public APIs and
+      XML format, they have varying levels of capabilities. Some may
+      allow creation of volumes, others may only allow use of pre-existing
+      volumes. Some may have constraints on volume size, or placement.
+    </p>
+    <p>
+      The top level tag for a storage pool document is 'pool'. It has
+      a single attribute <code>type</code>, which is one of <code>dir</code>,
+      <code>fs</code>, <code>netfs</code>, <code>disk</code>,
+      <code>iscsi</code>, <code>logical</code>, <code>scsi</code>
+      (all <span class="since">since 0.4.1</span>), <code>mpath</code>
+      (<span class="since">since 0.7.1</span>), <code>rbd</code>
+      (<span class="since">since 0.9.13</span>), <code>sheepdog</code>
+      (<span class="since">since 0.10.0</span>),
+      <code>gluster</code> (<span class="since">since
+      1.2.0</span>) or <code>zfs</code> (<span class="since">since
+      1.2.8</span>). This corresponds to the
+      storage backend drivers listed further along in this document.
+    </p>
+    <h3><a name="StoragePoolFirst">General metadata</a></h3>
+
+    <pre>
+      &lt;pool type="iscsi"&gt;
+        &lt;name&gt;virtimages&lt;/name&gt;
+        &lt;uuid&gt;3e3fce45-4f53-4fa7-bb32-11f34168b82b&lt;/uuid&gt;
+        &lt;allocation&gt;10000000&lt;/allocation&gt;
+        &lt;capacity&gt;50000000&lt;/capacity&gt;
+        &lt;available&gt;40000000&lt;/available&gt;
+        ...</pre>
+
+    <dl>
+      <dt><code>name</code></dt>
+      <dd>Providing a name for the pool which is unique to the host.
+        This is mandatory when defining a pool. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>uuid</code></dt>
+      <dd>Providing an identifier for the pool which is globally unique.
+        This is optional when defining a pool, a UUID will be generated if
+        omitted. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>allocation</code></dt>
+      <dd>Providing the total storage allocation for the pool. This may
+        be larger than the sum of the allocation of all volumes due to
+        metadata overhead. This value is in bytes. This is not applicable
+        when creating a pool. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>capacity</code></dt>
+      <dd>Providing the total storage capacity for the pool. Due to
+        underlying device constraints it may not be possible to use the
+        full capacity for storage volumes. This value is in bytes. This
+        is not applicable when creating a pool. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>available</code></dt>
+      <dd>Providing the free space available for allocating new volumes
+        in the pool. Due to underlying device constraints it may not be
+        possible to allocate the entire free space to a single volume.
+        This value is in bytes. This is not applicable when creating a
+        pool. <span class="since">Since 0.4.1</span></dd>
+    </dl>
+
+    <h3><a name="StoragePoolSource">Source elements</a></h3>
+
+    <p>
+      A single <code>source</code> element is contained within the top level
+      <code>pool</code> element. This tag is used to describe the source of
+      the storage pool. The set of child elements that it will contain
+      depend on the pool type, but come from the following child elements:
+    </p>
+
+    <pre>
+        ...
+        &lt;source&gt;
+          &lt;host name="iscsi.example.com"/&gt;
+          &lt;device path="demo-target"/&gt;
+          &lt;auth type='chap' username='myname'&gt;
+            &lt;secret usage='mycluster_myname'/&gt;
+          &lt;/auth&gt;
+          &lt;vendor name="Acme"/&gt;
+          &lt;product name="model"/&gt;
+        &lt;/source&gt;
+        ...</pre>
+
+    <pre>
+        ...
+        &lt;source&gt;
+          &lt;adapter type='scsi_host' name='scsi_host1'/&gt;
+        &lt;/source&gt;
+        ...</pre>
+
+    <pre>
+        ...
+        &lt;source&gt;
+          &lt;adapter type='scsi_host'&gt;
+            &lt;parentaddr unique_id='1'&gt;
+              &lt;address domain='0x0000' bus='0x00' slot='0x1f' addr='0x2'/&gt;
+            &lt;/parentaddr&gt;
+          &lt;/adapter&gt;
+        &lt;/source&gt;
+        ...</pre>
+
+    <pre>
+        ...
+        &lt;source&gt;
+          &lt;adapter type='fc_host' parent='scsi_host5' wwnn='20000000c9831b4b' wwpn='10000000c9831b4b'/&gt;
+        &lt;/source&gt;
+        ...</pre>
+
+    <dl>
+      <dt><code>device</code></dt>
+      <dd>Provides the source for pools backed by physical devices
+        (pool types <code>fs</code>, <code>logical</code>, <code>disk</code>,
+        <code>iscsi</code>, <code>zfs</code>).
+        May be repeated multiple times depending on backend driver. Contains
+        a single attribute <code>path</code> which is the fully qualified
+        path to the block device node. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>dir</code></dt>
+      <dd>Provides the source for pools backed by directories (pool
+        type <code>dir</code>), or optionally to select a subdirectory
+        within a pool that resembles a filesystem (pool
+        type <code>gluster</code>). May
+        only occur once. Contains a single attribute <code>path</code>
+        which is the fully qualified path to the backing directory.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>adapter</code></dt>
+      <dd>Provides the source for pools backed by SCSI adapters (pool
+        type <code>scsi</code>). May only occur once.
+        <dl>
+          <dt><code>name</code></dt>
+          <dd>The SCSI adapter name (e.g. "scsi_host1", although a name
+            such as "host1" is still supported for backwards compatibility,
+            it is not recommended). The scsi_host name to be used can be
+            determined from the output of a <code>virsh nodedev-list
+            scsi_host</code> command followed by a combination of
+            <code>lspci</code> and <code>virsh nodedev-dumpxml
+            scsi_hostN</code> commands to find the <code>scsi_hostN</code>
+            to be used. <span class="since">Since 0.6.2</span>
+            <p>
+            It is further recommended to utilize the
+            <code>parentaddr</code> element since it's possible to have
+            the path to which the scsi_hostN uses change between system
+            reboots. <span class="since">Since 1.2.7</span>
+            </p>
+          </dd>
+        </dl>
+        <dl>
+          <dt><code>type</code></dt>
+          <dd>Specifies the adapter type. Valid values are "scsi_host" or
+            "fc_host". If omitted and the <code>name</code> attribute is
+            specified, then it defaults to "scsi_host". To keep backwards
+            compatibility, this attribute is optional <b>only</b> for the
+            "scsi_host" adapter, but is mandatory for the "fc_host" adapter.
+            <span class="since">Since 1.0.5</span>
+            A "fc_host" capable scsi_hostN can be determined by using
+            <code>virsh nodedev-list --cap fc_host</code>.
+            <span class="since">Since 1.2.8</span>
+            <p>
+            Note: Regardless of whether a "scsi_host" adapter type is defined
+            using a <code>name</code> or a <code>parentaddr</code>, it
+            should refer to a real scsi_host adapter as found through a
+            <code>virsh nodedev-list scsi_host</code> and <code>virsh
+            nodedev-dumpxml scsi_hostN</code> on one of the scsi_host's
+            displayed. It should not refer to a "fc_host" capable scsi_hostN
+            nor should it refer to the vHBA created for some "fc_host"
+            adapter. For a vHBA the <code>nodedev-dumpxml</code>
+            output parent setting will be the "fc_host" capable scsi_hostN
+            value. Additionally, do not refer to an iSCSI scsi_hostN for the
+            "scsi_host" source. An iSCSI scsi_hostN's
+            <code>nodedev-dumpxml</code> output parent field is generally
+            "computer". This is a libvirt created parent value indicating
+            no parent was defined for the node device.
+            </p>
+            </dd>
+        </dl>
+        <dl>
+          <dt><code>wwnn</code> and <code>wwpn</code></dt>
+          <dd>The "World Wide Node Name" (<code>wwnn</code>) and "World Wide
+            Port Name" (<code>wwpn</code>) are used by the "fc_host" adapter
+            to uniquely identify the device in the Fibre Channel storage fabric
+            (the device can be either a HBA or vHBA). Both wwnn and wwpn should
+            be specified. Use the command 'virsh nodedev-dumpxml' to determine
+            how to set the values for the wwnn/wwpn of a (v)HBA. The wwnn and
+            wwpn have very specific numerical format requirements based on the
+            hypervisor being used, thus care should be taken if you decide to
+            generate your own to follow the standards; otherwise, the pool
+            will fail to start with an opaque error message indicating failure
+            to write to the vport_create file during vport create/delete due
+            to "No such file or directory".
+            <span class="since">Since 1.0.4</span>
+          </dd>
+        </dl>
+        <dl>
+          <dt><code>parent</code></dt>
+          <dd>Used by the "fc_host" adapter type to optionally specify the
+            parent scsi_host device defined in the
+            <a href="formatnode.html">Node Device</a> database as the
+            <a href="http://wiki.libvirt.org/page/NPIV_in_libvirt">NPIV</a>
+            virtual Host Bus Adapter (vHBA). The value provided must be
+            a vport capable scsi_host. The value is not the scsi_host of
+            the vHBA created by 'virsh nodedev-create', rather it is
+            the parent of that vHBA. If the value is not provided, libvirt
+            will determine the parent based either finding the wwnn,wwpn
+            defined for an existing scsi_host or by creating a vHBA. Providing
+            the parent attribute is also useful for the duplicate pool
+            definition checks. This is more important in environments where
+            both the "fc_host" and "scsi_host" source adapter pools are being
+            used in order to ensure a new definition doesn't duplicate using
+            the scsi_hostN of some existing storage pool.
+            <span class="since">Since 1.0.4</span>
+          </dd>
+          <dt><code>managed</code></dt>
+          <dd>An optional attribute to instruct the SCSI storage backend to
+            manage destroying the vHBA when the pool is destroyed. For
+            configurations that do not provide an already created vHBA
+            from a 'virsh nodedev-create', libvirt will set this property
+            to "yes". For configurations that have already created a vHBA
+            via 'virsh nodedev-create' and are using the wwnn/wwpn from
+            that vHBA and optionally the scsi_host parent, setting this
+            attribute to "yes" will allow libvirt to destroy the node device
+            when the pool is destroyed. If this attribute is set to "no" or
+            not defined in the XML, then libvirt will not destroy the vHBA.
+            <span class="since">Since 1.2.11</span>
+          </dd>
+        </dl>
+        <dl>
+          <dt><code>parentaddr</code></dt>
+          <dd>Used by the "scsi_host" adapter type instead of the
+            <code>name</code> attribute to more uniquely identify the
+            SCSI host. Using a combination of the <code>unique_id</code>
+            attribute and the <code>address</code> element to formulate
+            a PCI address, a search will be performed of the
+            <code>/sys/class/scsi_host/hostNN</code> links for a
+            matching PCI address with a matching <code>unique_id</code>
+            value in the <code>/sys/class/scsi_host/hostNN/unique_id</code>
+            file. The value in the "unique_id" file will be unique enough
+            for the specific PCI address. The <code>hostNN</code> will be
+            used by libvirt as the basis to define which SCSI host is to
+            be used for the currently booted system.
+            <span class="since">Since 1.2.7</span>
+            <dl>
+              <dt><code>address</code></dt>
+              <dd>The PCI address of the scsi_host device to be used. Using
+                a PCI address provides consistent naming across system reboots
+                and kernel reloads. The address will have four attributes:
+                <code>domain</code> (a 2-byte hex integer, not currently used
+                by qemu), <code>bus</code> (a hex value between 0 and 0xff,
+                inclusive), <code>slot</code> (a hex value between 0x0 and
+                0x1f, inclusive), and <code>function</code> (a value between
+                0 and 7, inclusive). The PCI address can be determined by
+                listing the <code>/sys/bus/pci/devices</code> and the
+                <code>/sys/class/scsi_host</code> directories in order to
+                find the expected scsi_host device. The address will be
+                provided in a format such as "0000:00:1f:2" which can be
+                used to generate the expected PCI address
+                "domain='0x0000' bus='0x00' slot='0x1f' function='0x0'".
+                Optionally, using the combination of the commands 'virsh
+                nodedev-list scsi_host' and 'virsh nodedev-dumpxml' for a
+                specific list entry and converting the resulting
+                <code>path</code> element as the basis to formulate the
+                correctly formatted PCI address.
+              </dd>
+            </dl>
+            <dl>
+              <dt><code>unique_id</code></dt>
+              <dd>Required <code>parentaddr</code> attribute used to determine
+                which of the scsi_host adapters for the provided PCI address
+                should be used. The value is determine by contents of the
+                <code>unique_id</code> file for the specific scsi_host adapter.
+                For a PCI address of "0000:00:1f:2", the unique identifer files
+                can be found using the command
+                <code>find -H /sys/class/scsi_host/host*/unique_id |
+                xargs grep '[0-9]'</code>. Optionally, the
+                <code>virsh nodedev-dumpxml scsi_hostN</code>' of a
+                specific scsi_hostN list entry will list the
+                <code>unique_id</code> value.
+              </dd>
+            </dl>
+          </dd>
+        </dl>
+      </dd>
+      <dt><code>host</code></dt>
+      <dd>Provides the source for pools backed by storage from a
+        remote server (pool types <code>netfs</code>, <code>iscsi</code>,
+        <code>rbd</code>, <code>sheepdog</code>, <code>gluster</code>). Will be
+        used in combination with a <code>directory</code>
+        or <code>device</code> element. Contains an attribute <code>name</code>
+        which is the hostname or IP address of the server. May optionally
+        contain a <code>port</code> attribute for the protocol specific
+        port number. <span class="since">Since 0.4.1</span></dd>
+      <dt><code>auth</code></dt>
+      <dd>If present, the <code>auth</code> element provides the
+        authentication credentials needed to access the source by the
+        setting of the <code>type</code> attribute (pool
+        types <code>iscsi</code>, <code>rbd</code>). The <code>type</code>
+        must be either "chap" or "ceph". Use "ceph" for
+        Ceph RBD (Rados Block Device) network sources and use "iscsi" for CHAP
+        (Challenge-Handshake Authentication Protocol) iSCSI
+        targets. Additionally a mandatory attribute
+        <code>username</code> identifies the username to use during
+        authentication as well as a sub-element <code>secret</code> with
+        a mandatory attribute <code>type</code>, to tie back to a
+        <a href="formatsecret.html">libvirt secret object</a> that
+        holds the actual password or other credentials. The domain XML
+        intentionally does not expose the password, only the reference
+        to the object that manages the password.
+        The <code>secret</code> element requires either a <code>uuid</code>
+        attribute with the UUID of the secret object or a <code>usage</code>
+        attribute matching the key that was specified in the
+        secret object.  <span class="since">Since 0.9.7 for "ceph" and
+        1.1.1 for "chap"</span>
+      </dd>
+      <dt><code>name</code></dt>
+      <dd>Provides the source for pools backed by storage from a
+        named element (pool types <code>logical</code>, <code>rbd</code>,
+        <code>sheepdog</code>, <code>gluster</code>).  Contains a
+        string identifier.
+        <span class="since">Since 0.4.5</span></dd>
+      <dt><code>format</code></dt>
+      <dd>Provides information about the format of the pool (pool
+        types <code>fs</code>, <code>netfs</code>, <code>disk</code>,
+        <code>logical</code>). This
+        contains a single attribute <code>type</code> whose value is
+        backend specific. This is typically used to indicate filesystem
+        type, or network filesystem type, or partition table type, or
+        LVM metadata type. All drivers are required to have a default
+        value for this, so it is optional. <span class="since">Since 0.4.1</span></dd>
+
+      <dt><code>vendor</code></dt>
+      <dd>Provides optional information about the vendor of the
+        storage device. This contains a single
+        attribute <code>name</code> whose value is backend
+        specific. <span class="since">Since 0.8.4</span></dd>
+      <dt><code>product</code></dt>
+      <dd>Provides an optional product name of the storage device.
+        This contains a single attribute <code>name</code> whose value
+        is backend specific.  <span class="since">Since 0.8.4</span></dd>
+    </dl>
+
+    <h3><a name="StoragePoolTarget">Target elements</a></h3>
+
+    <p>
+      A single <code>target</code> element is contained within the top level
+      <code>pool</code> element for some types of pools (pool
+      types <code>dir</code>, <code>fs</code>, <code>netfs</code>,
+      <code>logical</code>, <code>disk</code>, <code>iscsi</code>,
+      <code>scsi</code>, <code>mpath</code>). This tag is used to
+      describe the mapping of
+      the storage pool into the host filesystem. It can contain the following
+      child elements:
+    </p>
+
+    <pre>
+        ...
+        &lt;target&gt;
+          &lt;path&gt;/dev/disk/by-path&lt;/path&gt;
+          &lt;permissions&gt;
+            &lt;owner&gt;107&lt;/owner&gt;
+            &lt;group&gt;107&lt;/group&gt;
+            &lt;mode&gt;0744&lt;/mode&gt;
+            &lt;label&gt;virt_image_t&lt;/label&gt;
+          &lt;/permissions&gt;
+          &lt;timestamps&gt;
+            &lt;atime&gt;1341933637.273190990&lt;/atime&gt;
+            &lt;mtime&gt;1341930622.047245868&lt;/mtime&gt;
+            &lt;ctime&gt;1341930622.047245868&lt;/ctime&gt;
+          &lt;/timestamps&gt;
+          &lt;encryption type='...'&gt;
+            ...
+          &lt;/encryption&gt;
+        &lt;/target&gt;
+      &lt;/pool&gt;</pre>
+
+    <dl>
+      <dt><code>path</code></dt>
+      <dd>Provides the location at which the pool will be mapped into
+        the local filesystem namespace. For a filesystem/directory based
+        pool it will be the name of the directory in which volumes will
+        be created. For device based pools it will be the name of the directory in which
+        devices nodes exist. For the latter <code>/dev/</code> may seem
+        like the logical choice, however, devices nodes there are not
+        guaranteed stable across reboots, since they are allocated on
+        demand. It is preferable to use a stable location such as one
+        of the <code>/dev/disk/by-{path|id|uuid|label}</code> locations.
+        <span class="since">Since 0.4.1</span>
+      </dd>
+      <dt><code>permissions</code></dt>
+      <dd>This is currently only useful for directory or filesystem based
+        pools, which are mapped as a directory into the local filesystem
+        namespace. It provides information about the permissions to use for the
+        final directory when the pool is built. The
+        <code>mode</code> element contains the octal permission set. The
+        <code>owner</code> element contains the numeric user ID. The <code>group</code>
+        element contains the numeric group ID. The <code>label</code> element
+        contains the MAC (eg SELinux) label string.
+        <span class="since">Since 0.4.1</span>
+      </dd>
+      <dt><code>timestamps</code></dt>
+      <dd>Provides timing information about the volume. Up to four
+        sub-elements are present,
+        where <code>atime</code>, <code>btime</code>, <code>ctime</code>
+        and <code>mtime</code> hold the access, birth, change and
+        modification time of the volume, where known. The used time
+        format is &lt;seconds&gt;.&lt;nanoseconds&gt; since the
+        beginning of the epoch (1 Jan 1970). If nanosecond resolution
+        is 0 or otherwise unsupported by the host OS or filesystem,
+        then the nanoseconds part is omitted.  This is a readonly
+        attribute and is ignored when creating a volume.
+        <span class="since">Since 0.10.0</span>
+      </dd>
+      <dt><code>encryption</code></dt>
+      <dd>If present, specifies how the volume is encrypted.  See
+        the <a href="formatstorageencryption.html">Storage Encryption</a> page
+        for more information.
+      </dd>
+    </dl>
+
+    <h3><a name="StoragePoolExtents">Device extents</a></h3>
+
+    <p>
+      If a storage pool exposes information about its underlying
+      placement / allocation scheme, the <code>device</code> element
+      within the <code>source</code> element may contain information
+      about its available extents. Some pools have a constraint that
+      a volume must be allocated entirely within a single constraint
+      (eg disk partition pools). Thus the extent information allows an
+      application to determine the maximum possible size for a new
+      volume
+    </p>
+    <p>
+      For storage pools supporting extent information, within each
+      <code>device</code> element there will be zero or more <code>freeExtent</code>
+      elements. Each of these elements contains two attributes, <code>start</code>
+      and <code>end</code> which provide the boundaries of the extent on the
+      device, measured in bytes.  <span class="since">Since 0.4.1</span>
+    </p>
+
+    <h2><a name="StorageVol">Storage volume XML</a></h2>
+    <p>
+      A storage volume will generally be either a file or a device
+      node; <span class="since">since 1.2.0</span>, an optional
+      output-only attribute <code>type</code> lists the actual type
+      (file, block, dir, network, or netdir), which is also available
+      from <code>virStorageVolGetInfo()</code>.  The storage volume
+      XML format is available <span class="since">since 0.4.1</span>
+    </p>
+
+    <h3><a name="StorageVolFirst">General metadata</a></h3>
+
+    <pre>
+      &lt;volume type='file'&gt;
+        &lt;name&gt;sparse.img&lt;/name&gt;
+        &lt;key&gt;/var/lib/xen/images/sparse.img&lt;/key&gt;
+        &lt;allocation&gt;0&lt;/allocation&gt;
+        &lt;capacity unit="T"&gt;1&lt;/capacity&gt;
+        ...</pre>
+
+    <dl>
+      <dt><code>name</code></dt>
+      <dd>Providing a name for the volume which is unique to the pool.
+        This is mandatory when defining a volume.  <span class="since">Since 0.4.1</span></dd>
+      <dt><code>key</code></dt>
+      <dd>Providing an identifier for the volume which identifies a
+          single volume. In some cases it's possible to have two distinct keys
+          identifying a single volume. This field cannot be set when creating
+          a volume: it is always generated.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>allocation</code></dt>
+      <dd>Providing the total storage allocation for the volume. This
+        may be smaller than the logical capacity if the volume is sparsely
+        allocated. It may also be larger than the logical capacity if the
+        volume has substantial metadata overhead. This value is in bytes.
+        If omitted when creating a volume, the volume will be fully
+        allocated at time of creation. If set to a value smaller than the
+        capacity, the pool has the <strong>option</strong> of deciding
+        to sparsely allocate a volume. It does not have to honour requests
+        for sparse allocation though. Different types of pools may treat
+        sparse volumes differently. For example, the <code>logical</code>
+        pool will not automatically expand volume's allocation when it
+        gets full; the user is responsible for doing that or configuring
+        dmeventd to do so automatically.<br/>
+        <br/>
+        By default this is specified in bytes, but an optional attribute
+        <code>unit</code> can be specified to adjust the passed value.
+        Values can be: 'B' or 'bytes' for bytes, 'KB' (kilobytes,
+        10<sup>3</sup> or 1000 bytes), 'K' or 'KiB' (kibibytes,
+        2<sup>10</sup> or 1024 bytes), 'MB' (megabytes, 10<sup>6</sup>
+        or 1,000,000 bytes), 'M' or 'MiB' (mebibytes, 2<sup>20</sup>
+        or 1,048,576 bytes), 'GB' (gigabytes, 10<sup>9</sup> or
+        1,000,000,000 bytes), 'G' or 'GiB' (gibibytes, 2<sup>30</sup>
+        or 1,073,741,824 bytes), 'TB' (terabytes, 10<sup>12</sup> or
+        1,000,000,000,000 bytes), 'T' or 'TiB' (tebibytes,
+        2<sup>40</sup> or 1,099,511,627,776 bytes), 'PB' (petabytes,
+        10<sup>15</sup> or 1,000,000,000,000,000 bytes), 'P' or 'PiB'
+        (pebibytes, 2<sup>50</sup> or 1,125,899,906,842,624 bytes),
+        'EB' (exabytes, 10<sup>18</sup> or 1,000,000,000,000,000,000
+        bytes), or 'E' or 'EiB' (exbibytes, 2<sup>60</sup> or
+        1,152,921,504,606,846,976 bytes).  <span class="since">Since
+        0.4.1, multi-character <code>unit</code> since
+        0.9.11</span></dd>
+      <dt><code>capacity</code></dt>
+      <dd>Providing the logical capacity for the volume. This value is
+        in bytes by default, but a <code>unit</code> attribute can be
+        specified with the same semantics as for <code>allocation</code>
+        This is compulsory when creating a volume.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>source</code></dt>
+      <dd>Provides information about the underlying storage allocation
+        of the volume. This may not be available for some pool types.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>target</code></dt>
+      <dd>Provides information about the representation of the volume
+        on the local host. <span class="since">Since 0.4.1</span></dd>
+    </dl>
+
+    <h3><a name="StorageVolTarget">Target elements</a></h3>
+
+    <p>
+      A single <code>target</code> element is contained within the top level
+      <code>volume</code> element. This tag is used to describe the mapping of
+      the storage volume into the host filesystem. It can contain the following
+      child elements:
+    </p>
+
+    <pre>
+        ...
+        &lt;target&gt;
+          &lt;path&gt;/var/lib/virt/images/sparse.img&lt;/path&gt;
+          &lt;format type='qcow2'/&gt;
+          &lt;permissions&gt;
+            &lt;owner&gt;107&lt;/owner&gt;
+            &lt;group&gt;107&lt;/group&gt;
+            &lt;mode&gt;0744&lt;/mode&gt;
+            &lt;label&gt;virt_image_t&lt;/label&gt;
+          &lt;/permissions&gt;
+          &lt;compat&gt;1.1&lt;/compat&gt;
+          &lt;nocow/&gt;
+          &lt;features&gt;
+            &lt;lazy_refcounts/&gt;
+          &lt;/features&gt;
+        &lt;/target&gt;</pre>
+
+    <dl>
+      <dt><code>path</code></dt>
+      <dd>Provides the location at which the volume can be accessed on
+        the local filesystem, as an absolute path. This is a readonly
+        attribute, so shouldn't be specified when creating a volume.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>format</code></dt>
+      <dd>Provides information about the pool specific volume format.
+        For disk pools it will provide the partition type. For filesystem
+        or directory pools it will provide the file format type, eg cow,
+        qcow, vmdk, raw. If omitted when creating a volume, the pool's
+        default format will be used. The actual format is specified via
+        the <code>type</code> attribute. Consult the
+        <a href="storage.html">storage driver page</a> for the list of valid
+        volume format type values for each specific pool. The
+        <code>format</code> will be ignored on input for pools without a
+        volume format type value and the default pool format will be used.
+        <span class="since">Since 0.4.1</span></dd>
+      <dt><code>permissions</code></dt>
+      <dd>Provides information about the default permissions to use
+        when creating volumes. This is currently only useful for directory
+        or filesystem based pools, where the volumes allocated are simple
+        files. For pools where the volumes are device nodes, the hotplug
+        scripts determine permissions. It contains 4 child elements. The
+        <code>mode</code> element contains the octal permission set. The
+        <code>owner</code> element contains the numeric user ID. The <code>group</code>
+        element contains the numeric group ID. The <code>label</code> element
+        contains the MAC (eg SELinux) label string.
+        <span class="since">Since 0.4.1</span>
+      </dd>
+      <dt><code>compat</code></dt>
+      <dd>Specify compatibility level. So far, this is only used for
+        <code>type='qcow2'</code> volumes. Valid values are <code>0.10</code>
+        and <code>1.1</code> so far, specifying QEMU version the images should
+        be compatible with. If the <code>feature</code> element is present,
+        1.1 is used. If omitted, qemu-img default is used.
+        <span class="since">Since 1.1.0</span>
+      </dd>
+      <dt><code>nocow</code></dt>
+      <dd>Turn off COW of the newly created volume. So far, this is only valid
+        for a file image in btrfs file system. It will improve performance when
+        the file image is used in VM. To create non-raw file images, it
+        requires QEMU version since 2.1. <span class="since">Since 1.2.7</span>
+      </dd>
+      <dt><code>features</code></dt>
+      <dd>Format-specific features. Only used for <code>qcow2</code> now.
+        Valid sub-elements are:
+        <ul>
+          <li><code>&lt;lazy_refcounts/&gt;</code> - allow delayed reference
+          counter updates. <span class="since">Since 1.1.0</span></li>
+        </ul>
+      </dd>
+    </dl>
+
+    <h3><a name="StorageVolBacking">Backing store elements</a></h3>
+
+    <p>
+      A single <code>backingStore</code> element is contained within the top level
+      <code>volume</code> element. This tag is used to describe the optional copy
+      on write, backing store for the storage volume. It can contain the following
+      child elements:
+    </p>
+
+    <pre>
+        ...
+        &lt;backingStore&gt;
+          &lt;path&gt;/var/lib/virt/images/master.img&lt;/path&gt;
+          &lt;format type='raw'/&gt;
+          &lt;permissions&gt;
+            &lt;owner&gt;107&lt;/owner&gt;
+            &lt;group&gt;107&lt;/group&gt;
+            &lt;mode&gt;0744&lt;/mode&gt;
+            &lt;label&gt;virt_image_t&lt;/label&gt;
+          &lt;/permissions&gt;
+        &lt;/backingStore&gt;
+      &lt;/volume&gt;</pre>
+
+    <dl>
+      <dt><code>path</code></dt>
+      <dd>Provides the location at which the backing store can be accessed on
+        the local filesystem, as an absolute path. If omitted, there is no
+        backing store for this volume.
+        <span class="since">Since 0.6.0</span></dd>
+      <dt><code>format</code></dt>
+      <dd>Provides information about the pool specific backing store format.
+        For disk pools it will provide the partition type. For filesystem
+        or directory pools it will provide the file format type, eg cow,
+        qcow, vmdk, raw. The actual format is specified via the type attribute.
+        Consult the pool-specific docs for the list of valid
+        values. Most file formats require a backing store of the same format,
+        however, the qcow2 format allows a different backing store format.
+        <span class="since">Since 0.6.0</span></dd>
+      <dt><code>permissions</code></dt>
+      <dd>Provides information about the permissions of the backing file.
+        It contains 4 child elements. The
+        <code>mode</code> element contains the octal permission set. The
+        <code>owner</code> element contains the numeric user ID. The <code>group</code>
+        element contains the numeric group ID. The <code>label</code> element
+        contains the MAC (eg SELinux) label string.
+        <span class="since">Since 0.6.0</span>
+      </dd>
+    </dl>
+
+    <h2><a name="examples">Example configuration</a></h2>
+
+    <p>
+      Here are a couple of examples, for a more complete set demonstrating
+      every type of storage pool, consult the <a href="storage.html">storage driver page</a>
+    </p>
+
+    <h3><a name="exampleFile">File based storage pool</a></h3>
+
+    <pre>
+      &lt;pool type="dir"&gt;
+        &lt;name&gt;virtimages&lt;/name&gt;
+        &lt;target&gt;
+          &lt;path&gt;/var/lib/virt/images&lt;/path&gt;
+        &lt;/target&gt;
+      &lt;/pool&gt;</pre>
+
+    <h3><a name="exampleISCSI">iSCSI based storage pool</a></h3>
+
+    <pre>
+      &lt;pool type="iscsi"&gt;
+        &lt;name&gt;virtimages&lt;/name&gt;
+        &lt;source&gt;
+          &lt;host name="iscsi.example.com"/&gt;
+          &lt;device path="iqn.2013-06.com.example:iscsi-pool"/&gt;
+          &lt;auth type='chap' username='myuser'&gt;
+            &lt;secret usage='libvirtiscsi'/&gt;
+          &lt;/auth&gt;
+        &lt;/source&gt;
+        &lt;target&gt;
+          &lt;path&gt;/dev/disk/by-path&lt;/path&gt;
+        &lt;/target&gt;
+      &lt;/pool&gt;</pre>
+
+    <h3><a name="exampleVol">Storage volume</a></h3>
+
+    <pre>
+      &lt;volume&gt;
+        &lt;name&gt;sparse.img&lt;/name&gt;
+        &lt;allocation&gt;0&lt;/allocation&gt;
+        &lt;capacity unit="T"&gt;1&lt;/capacity&gt;
+        &lt;target&gt;
+          &lt;path&gt;/var/lib/virt/images/sparse.img&lt;/path&gt;
+          &lt;permissions&gt;
+            &lt;owner&gt;107&lt;/owner&gt;
+            &lt;group&gt;107&lt;/group&gt;
+            &lt;mode&gt;0744&lt;/mode&gt;
+            &lt;label&gt;virt_image_t&lt;/label&gt;
+          &lt;/permissions&gt;
+        &lt;/target&gt;
+      &lt;/volume&gt;</pre>
+  </body>
+</html>

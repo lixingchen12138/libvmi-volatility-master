@@ -1,0 +1,249 @@
+util/libvirt_util_la-virarch.lo: util/virarch.c \
+ /usr/include/stdc-predef.h ../config.h ../config-post.h \
+ ../gnulib/lib/sys/utsname.h /usr/include/x86_64-linux-gnu/sys/utsname.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/bits/utsname.h util/virlog.h internal.h \
+ /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h ../gnulib/lib/verify.h \
+ ../gnulib/lib/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h ../gnulib/lib/gettext.h \
+ /usr/include/libintl.h ../gnulib/lib/locale.h /usr/include/locale.h \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/xlocale.h \
+ ../gnulib/lib/string.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string2.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h ../gnulib/lib/stdlib.h \
+ /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/string3.h \
+ ../include/libvirt/libvirt.h ../gnulib/lib/sys/types.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h ../gnulib/lib/time.h \
+ /usr/include/time.h ../gnulib/lib/sys/select.h \
+ /usr/include/x86_64-linux-gnu/sys/select.h \
+ /usr/include/x86_64-linux-gnu/bits/select.h \
+ /usr/include/x86_64-linux-gnu/bits/sigset.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/select2.h \
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ ../include/libvirt/libvirt-host.h ../include/libvirt/libvirt-domain.h \
+ ../include/libvirt/libvirt-domain-snapshot.h \
+ ../include/libvirt/libvirt-event.h \
+ ../include/libvirt/libvirt-interface.h \
+ ../include/libvirt/libvirt-network.h \
+ ../include/libvirt/libvirt-nodedev.h \
+ ../include/libvirt/libvirt-nwfilter.h \
+ ../include/libvirt/libvirt-secret.h ../include/libvirt/libvirt-storage.h \
+ ../include/libvirt/libvirt-stream.h ../include/libvirt/libvirt-lxc.h \
+ ../include/libvirt/libvirt-qemu.h ../include/libvirt/virterror.h \
+ ../gnulib/lib/c-strcase.h ../gnulib/lib/ignore-value.h \
+ ../gnulib/lib/count-leading-zeros.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h ../gnulib/lib/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h util/virbuffer.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h util/virarch.h
+
+/usr/include/stdc-predef.h:
+
+../config.h:
+
+../config-post.h:
+
+../gnulib/lib/sys/utsname.h:
+
+/usr/include/x86_64-linux-gnu/sys/utsname.h:
+
+/usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/utsname.h:
+
+util/virlog.h:
+
+internal.h:
+
+/usr/include/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+../gnulib/lib/verify.h:
+
+../gnulib/lib/stddef.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+../gnulib/lib/gettext.h:
+
+/usr/include/libintl.h:
+
+../gnulib/lib/locale.h:
+
+/usr/include/locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/xlocale.h:
+
+../gnulib/lib/string.h:
+
+/usr/include/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/string2.h:
+
+/usr/include/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
+../gnulib/lib/stdlib.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/x86_64-linux-gnu/bits/string3.h:
+
+../include/libvirt/libvirt.h:
+
+../gnulib/lib/sys/types.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+../gnulib/lib/time.h:
+
+/usr/include/time.h:
+
+../gnulib/lib/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigset.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/select2.h:
+
+/usr/include/x86_64-linux-gnu/sys/sysmacros.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+../include/libvirt/libvirt-host.h:
+
+../include/libvirt/libvirt-domain.h:
+
+../include/libvirt/libvirt-domain-snapshot.h:
+
+../include/libvirt/libvirt-event.h:
+
+../include/libvirt/libvirt-interface.h:
+
+../include/libvirt/libvirt-network.h:
+
+../include/libvirt/libvirt-nodedev.h:
+
+../include/libvirt/libvirt-nwfilter.h:
+
+../include/libvirt/libvirt-secret.h:
+
+../include/libvirt/libvirt-storage.h:
+
+../include/libvirt/libvirt-stream.h:
+
+../include/libvirt/libvirt-lxc.h:
+
+../include/libvirt/libvirt-qemu.h:
+
+../include/libvirt/virterror.h:
+
+../gnulib/lib/c-strcase.h:
+
+../gnulib/lib/ignore-value.h:
+
+../gnulib/lib/count-leading-zeros.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+../gnulib/lib/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib.h:
+
+util/virbuffer.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
+
+util/virarch.h:
