@@ -20,6 +20,7 @@
 	virsh list --all 显示所有虚拟机
 
 #4.配置libvmi
+修改/etc/libvmi.conf
 ##(1)windows配置
 ###安装依赖库：
 	sudo apt-get install python-pefile   //安装python-pefile
