@@ -47,4 +47,6 @@
 	make
 	insmod findoffsets.ko
 	rmmod findoffsets
-	dmesg调试，控制台上打印出结果，修改虚拟机名和sysmap路径，找到boot目录下的System.map作为sysmap路径
+	dmesg调试，控制台上打印出结果，修改虚拟机名和各项地址
+	进入dom0
+	找到boot目录下的System.map作为sysmap路径
