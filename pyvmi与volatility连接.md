@@ -1,37 +1,37 @@
-##1.安装dwarfdump
-###ubuntu环境下:<br>
+## 1.安装dwarfdump
+### ubuntu环境下:<br>
 	sudo apt-get install dwarfdump
 
-###centos环境下（没有dwarfdump源，需手动安装）：
+### centos环境下（没有dwarfdump源，需手动安装）：
 	yum install elfutils-libelf-devel
 	./configure
 	make dd
 	cp dwarfdump/dwarfdump /usr/local/bin
 	cp dwarfdump/dwarfdump.conf /usr/local/lib
 
-##2.生成module.dwarf
+## 2.生成module.dwarf
 	cd tools/linux
 	make
 
-##3.制作profile(将生成的module.dwarf和system.map打包)
+## 3.制作profile(将生成的module.dwarf和system.map打包)
 	sudo zip volatility/volatility/plugins/overlays/linux/Ubuntu1204.zip volatility/tools/linux/module.dwarf /boot/System.map-3.19.0-25-generic
 
-##4.安装volatility
+## 4.安装volatility
 	sudo python setup.py install
 
-##5.移动pyaddress.py
+## 5.移动pyaddress.py
 	cd libvmi/tools/pyvmi
 	复制pyvmiaddress.py到volatility/volatility/plugins/addrspaces目录
 
-##6.安装distorm3
+## 6.安装distorm3
 	sudo python setup.py install
 
-##7.pyvmi安装
+## 7.pyvmi安装
 	cd libvmi/tools/pyvmi
 	sudo python setup.py build
 	sudo python setup.py install
 
-##8.运行
+## 8.运行
 	cd volatility
 	sudo python vol.py --info|grep Linux
 	查看profile名<br>
