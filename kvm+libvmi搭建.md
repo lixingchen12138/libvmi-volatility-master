@@ -27,7 +27,7 @@
 	sudo apt-get install mscompress      //安装mscompress
 	sudo apt-get install cabextract      //安装cabextract
 	sudo apt-get install python-pip        //安装construct
-	sudo pip install construct
+	sudo pip install construct==2.5.5-reupload  //因为pdbprase作者没有时间维护，所以对新版本construct并不兼容
 	svn checkout http://pdbparse.googlecode.com/svn/trunk/pdbparse-read-only
 	cd pdbparse-read-only/
 	sudo python setup.py install           //安装pdbparse(需翻墙)
